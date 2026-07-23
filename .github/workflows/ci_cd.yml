@@ -1,0 +1,40 @@
+name: Pipeline DevOps - CI/CD
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+jobs:
+  integracao_continua:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Baixar o código do repositório
+      uses: actions/checkout@v4
+
+    - name: Configurar o Python no servidor do GitHub
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Instalar dependências da aplicação
+      run: |
+        python -m pip install --upgrade pip
+        pip install fastapi uvicorn pytest httpx
+
+    - name: Executar os testes unitários (pytest)
+      run: |
+        pytest test_main.py
+
+  entrega_continua:
+    needs: integracao_continua
+    runs-on: ubuntu-latest
+    steps:
+    - name: Baixar o código do repositório
+      uses: actions/checkout@v4
+
+    - name: Simular a publicação da imagem Docker
+      run: |
+        echo "Construindo imagem da Lista de Tarefas..."
+        echo "Publicando nova versão da aplicação com sucesso!"
