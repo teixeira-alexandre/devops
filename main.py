@@ -1,3 +1,5 @@
+# aula 03/07
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from datetime import datetime
@@ -51,3 +53,22 @@ def excluir_tarefa(id: int):
             del banco_de_tarefas[index]
             return {"mensagem": "Tarefa excluída com sucesso"}
     raise HTTPException(status_code=404, detail="Tarefa não encontrada")
+
+# aula 04/07
+
+@app.get("/health")
+def health_check():
+    return {"status": "OK"}
+
+
+@app.get("/metricas")
+def metricas():
+    quantidade = len(banco_de_tarefas)
+    finalizadas = sum(1 for tarefa in banco_de_tarefas if tarefa.concluido)
+    pendentes = quantidade - finalizadas
+    
+    return {
+        "quantidade_tarefas": quantidade,
+        "tarefas_finalizadas": finalizadas,
+        "tarefas_pendentes": pendentes
+    }
