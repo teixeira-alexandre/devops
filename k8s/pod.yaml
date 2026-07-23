@@ -10,6 +10,6 @@ spec:
     image: python:3.12
     command: ["/bin/sh", "-c"]
     args:
-      - pip install "fastapi[standard]" uvicorn && uvicorn main:app --host 0.0.0.0 --port 80
+    - curl -sO https://raw.githubusercontent.com/Disnerxx/DevOps-Entrega02/main/main.py && pip install "fastapi[standard]" uvicorn && uvicorn main:app --host 0.0.0.0 --port 80
     ports:
     - containerPort: 80
