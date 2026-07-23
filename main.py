@@ -54,6 +54,22 @@ def excluir_tarefa(id: int):
             return {"mensagem": "Tarefa excluída com sucesso"}
     raise HTTPException(status_code=404, detail="Tarefa não encontrada")
 
+
+@app.get("/health")
+def health_check():
+    return {"status": "OK"}
+
+@app.get("/metricas")
+def obter_metricas():
+    total = len(banco_de_tarefas)
+    finalizadas = len([t for t in banco_de_tarefas if t.concluido])
+    pendentes = total - finalizadas
+    return {
+        "quantidade_tarefas": total,
+        "tarefas_finalizadas": finalizadas,
+        "tarefas_pendentes": pendentes
+    }
+
 # aula 04/07
 
 @app.get("/health")
