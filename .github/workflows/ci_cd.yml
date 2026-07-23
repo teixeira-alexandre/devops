@@ -47,5 +47,5 @@ jobs:
         context: .
         push: true
         tags: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/lista-tarefas:latest
-          ${{ secrets.DOCKERHUB_USERNAME }}/lista-tarefas:${{ github.sha }}
+          ${{ secrets.DOCKERHUB_USERNAME }}/devops-api:latest
+          ${{ secrets.DOCKERHUB_USERNAME }}/devops-api:${{ github.sha }}

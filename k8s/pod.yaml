@@ -7,9 +7,7 @@ metadata:
 spec:
   containers:
   - name: api-container
-    image: python:3.12
-    command: ["/bin/sh", "-c"]
-    args:
-    - curl -sO https://github.com/teixeira-alexandre/devops/blob/main/main.py && pip install "fastapi[standard]" uvicorn && uvicorn main:app --host 0.0.0.0 --port 80
+    image: teixeiraalexandre/devops-api:latest
+    imagePullPolicy: Always
     ports:
     - containerPort: 80
