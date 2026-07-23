@@ -1,6 +1,6 @@
 fastapi[standard]
 pytest
-httpx2
+httpx
 pytest-cov
 bandit
 pylint
